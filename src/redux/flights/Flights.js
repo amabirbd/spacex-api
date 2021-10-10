@@ -8,7 +8,7 @@ function Flights() {
 
   useEffect(() => {
     dispatch(getFlights());
-  }, []);
+  }, [dispatch]);
 
   console.log(flights);
   if (status === "success") {
