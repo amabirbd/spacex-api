@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFlights } from "./flightSlice";
 import Card from "../../components/Card";
-import { autocompleteClasses } from "@mui/material";
 function Flights() {
   const dispatch = useDispatch();
   const { flights, status } = useSelector((state) => state.flights);

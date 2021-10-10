@@ -4,6 +4,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Link } from "@mui/material";
 
 export default function BasicCard({ flight }) {
   return (
@@ -28,15 +29,18 @@ export default function BasicCard({ flight }) {
           {flight.rocket_name}
         </Typography>
         <Typography variant="body2">
-          {flight.details}
+          {flight.details ? (
+            <p>{flight.details}</p>
+          ) : (
+            <p>No details available</p>
+          )}
           <br />
-          {'"a benevolent smile"'}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">
-          <a href="">Learn More</a>
-        </Button>
+        <Link component="button" variant="button">
+          Read more
+        </Link>
       </CardActions>
     </Card>
   );
