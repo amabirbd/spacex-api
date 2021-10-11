@@ -7,10 +7,8 @@ import {
   RadioGroup,
 } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
 
 function SearchByDate() {
-  const dispatch = useDispatch();
   return (
     <div>
       <FormControl component="fieldset">
@@ -23,17 +21,17 @@ function SearchByDate() {
           <FormControlLabel
             value="prev_week"
             control={<Radio />}
-            label="previous week"
+            label="Previous week"
           />
           <FormControlLabel
             value="prev_month"
             control={<Radio />}
-            label="previous month"
+            label="Previous month"
           />
           <FormControlLabel
             value="prev_year"
             control={<Radio />}
-            label="previous year"
+            label="Previous year"
           />
         </RadioGroup>
         <Button type="submit">search</Button>

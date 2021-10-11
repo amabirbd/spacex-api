@@ -25,10 +25,14 @@ export default function BasicCard({ flight }) {
         <Typography variant="h5" component="div">
           {flight.mission_name}
         </Typography>
+
+        <Typography variant="h6" component="div" color="tomato">
+          {flight.rocket.rocket_name}
+        </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {flight.rocket_name}
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" color="gray">
           {flight.details ? (
             <p>{flight.details}</p>
           ) : (

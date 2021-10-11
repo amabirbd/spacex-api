@@ -16,9 +16,26 @@ const flightSlice = createSlice({
   initialState,
 
   reducers: {
-    search: (state, action) => {
+    searchByRocketName: (state, action) => {
       const value = action.payload;
-      console.log(value);
+      state.flights = state.flights.filter((val) =>
+        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
+      );
+    },
+    searchByLastWeek: (state, action) => {
+      const value = action.payload;
+      state.flights = state.flights.filter((val) =>
+        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
+      );
+    },
+    searchByLastMonth: (state, action) => {
+      const value = action.payload;
+      state.flights = state.flights.filter((val) =>
+        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
+      );
+    },
+    searchByLastYear: (state, action) => {
+      const value = action.payload;
       state.flights = state.flights.filter((val) =>
         val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
       );
@@ -39,5 +56,5 @@ const flightSlice = createSlice({
   },
 });
 
-export const { search } = flightSlice.actions;
+export const { searchByRocketName } = flightSlice.actions;
 export default flightSlice.reducer;

@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { search } from "../redux/flights/flightSlice";
+import { searchByRocketName } from "../redux/flights/flightSlice";
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function SearchBar() {
         placeholder="search by rocket name"
         variant="outlined"
         onChange={(e) => {
-          dispatch(search(e.target.value));
+          dispatch(searchByRocketName(e.target.value));
         }}
       />
     </div>

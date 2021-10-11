@@ -5,14 +5,10 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  TextField,
 } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { search } from "../redux/flights/flightSlice";
 
 function SearchByLaunchStatus() {
-  const dispatch = useDispatch();
   return (
     <div>
       <FormControl component="fieldset">
