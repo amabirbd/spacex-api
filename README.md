@@ -1,11 +1,13 @@
-## React app
+# React app
 
 A react app showing all spacex missions using the spacex api.
 
-# Running the app
+# live [demo](https://spacex-api-phi.vercel.app/)
 
-### clone the repo.
+## Running the app
 
-### npm install
+`clone the repo.`
 
-### npm start
+`npm install`
+
+`npm start`

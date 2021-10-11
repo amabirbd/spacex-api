@@ -14,7 +14,16 @@ const initialState = {
 const flightSlice = createSlice({
   name: "flights",
   initialState,
-  reducers: {},
+
+  reducers: {
+    search: (state, action) => {
+      const value = action.payload;
+      console.log(value);
+      state.flights = state.flights.filter((val) =>
+        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
+      );
+    },
+  },
 
   extraReducers: {
     [getFlights.pending]: (state, action) => {
@@ -30,5 +39,5 @@ const flightSlice = createSlice({
   },
 });
 
-// const {} = flightSlice.actions;
+export const { search } = flightSlice.actions;
 export default flightSlice.reducer;

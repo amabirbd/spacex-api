@@ -12,3 +12,13 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.filter {
+  margin: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter div {
+  margin: 10px 30px;
+}
