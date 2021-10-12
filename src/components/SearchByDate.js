@@ -21,7 +21,7 @@ function SearchByDate() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(searchByDate(e.target.value));
+    dispatch(searchByDate(value));
     console.log(e.target.value);
   };
 

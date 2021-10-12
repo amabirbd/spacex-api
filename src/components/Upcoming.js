@@ -11,12 +11,12 @@ import { useDispatch } from "react-redux";
 import { isUpcoming } from "../redux/flights/flightSlice";
 
 function Upcoming() {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(isUpcoming(e.target.value));
+    dispatch(isUpcoming(value));
   };
 
   const handleRadioChange = (e) => {
@@ -31,7 +31,6 @@ function Upcoming() {
         <RadioGroup
           aria-label="isUpcoming"
           name="isUpcoming"
-          vlaue={value}
           onChange={handleRadioChange}
         >
           <FormControlLabel

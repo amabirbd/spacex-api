@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
 
 export default function BasicCard({ flight }) {
+  let date = new Date(flight.launch_date_utc).toDateString();
   return (
     <Card
       sx={{
@@ -19,9 +20,6 @@ export default function BasicCard({ flight }) {
       }}
     >
       <CardContent>
-        {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography> */}
         <Typography variant="h5" component="div">
           {flight.mission_name}
         </Typography>
@@ -32,6 +30,9 @@ export default function BasicCard({ flight }) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {flight.rocket_name}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {date}
+        </Typography>
         <Typography variant="body2" color="gray">
           {flight.details ? (
             <p>{flight.details}</p>
@@ -41,6 +42,7 @@ export default function BasicCard({ flight }) {
           <br />
         </Typography>
       </CardContent>
+
       <CardActions>
         <Link component="button" variant="button">
           Read more

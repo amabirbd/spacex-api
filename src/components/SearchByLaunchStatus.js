@@ -10,31 +10,27 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchByLaunchStatus } from "../redux/flights/flightSlice";
 
-function SearchByLaunchStatus() {
+function SearchByLaunchDate() {
   const [value, setValue] = useState();
   const dispatch = useDispatch();
 
-  const handleRadioChange = (e) => {
-    setValue(e.target.value);
-    console.log(value);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+    dispatch(searchByLaunchStatus(value));
+  };
 
-    dispatch(searchByLaunchStatus(e.target.value));
-    console.log("target value -");
+  const handleRadioChange = (e) => {
+    setValue(e.target.value);
     console.log(e.target.value);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <FormControl component="fieldset">
-        <FormLabel component="legend">Launch status</FormLabel>
+        <FormLabel component="legend">Search by launch date</FormLabel>
         <RadioGroup
-          aria-label="isUpcoming"
-          name="isUpcoming"
-          vlaue={value}
+          aria-label="launchDate"
+          name="launchDate"
           onChange={handleRadioChange}
         >
           <FormControlLabel
@@ -54,4 +50,4 @@ function SearchByLaunchStatus() {
   );
 }
 
-export default SearchByLaunchStatus;
+export default SearchByLaunchDate;
