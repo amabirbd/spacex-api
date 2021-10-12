@@ -14,14 +14,13 @@ function SearchByDate() {
   const [value, setValue] = useState();
   const dispatch = useDispatch();
 
-  const handleRadioChange = (e) => {
-    setValue(e.target.value);
-    console.log(value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(searchByDate(value));
+  };
+
+  const handleRadioChange = (e) => {
+    setValue(e.target.value);
     console.log(e.target.value);
   };
 
@@ -35,17 +34,17 @@ function SearchByDate() {
           onChange={handleRadioChange}
         >
           <FormControlLabel
-            value="prev_week"
+            value="lastWeek"
             control={<Radio />}
             label="Previous week"
           />
           <FormControlLabel
-            value="prev_month"
+            value="lastMonth"
             control={<Radio />}
             label="Previous month"
           />
           <FormControlLabel
-            value="prev_year"
+            value="lastYear"
             control={<Radio />}
             label="Previous year"
           />

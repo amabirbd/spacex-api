@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 // import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "@mui/material";
+import moment from "moment";
 
 export default function BasicCard({ flight }) {
   let date = new Date(flight.launch_date_utc).toDateString();
@@ -31,7 +32,7 @@ export default function BasicCard({ flight }) {
           {flight.rocket_name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {date}
+          {moment(date).calendar()}
         </Typography>
         <Typography variant="body2" color="gray">
           {flight.details ? (

@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import moment from "moment";
 
 export const getFlights = createAsyncThunk("flights/fetchFlights", async () => {
   return await fetch("https://api.spacexdata.com/v3/launches").then((res) =>
@@ -25,12 +26,44 @@ const flightSlice = createSlice({
 
     searchByDate: (state, action) => {
       const value = action.payload;
+
+      let now = moment();
+      let oneWeekEarlier = now.subtract(7, "days");
+      let oneMonthEarlier = now.subtract(1, "months");
+      let oneYearEarlier = now.subtract(1, "years");
+
       switch (value) {
         case "lastWeek":
           state.flights = state.flights.filter((val) => {
-            return val;
+            let launchTime = moment(val.launch_date_utc);
+
+            if (launchTime.isSameOrAfter(oneWeekEarlier)) {
+              return val;
+            }
+            return null;
           });
           break;
+        case "lastMonth":
+          state.flights = state.flights.filter((val) => {
+            let launchTime = moment(val.launch_date_utc);
+
+            if (launchTime.isSameOrAfter(oneMonthEarlier)) {
+              return val;
+            }
+            return null;
+          });
+          break;
+        case "lastYear":
+          state.flights = state.flights.filter((val) => {
+            let launchTime = moment(val.launch_date_utc);
+
+            if (launchTime.isSameOrAfter(oneYearEarlier)) {
+              return val;
+            }
+            return null;
+          });
+          break;
+
         default:
           state.flights = state.flights.filter((val) => {
             return val;
