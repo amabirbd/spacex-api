@@ -22,23 +22,56 @@ const flightSlice = createSlice({
         val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
       );
     },
-    searchByLastWeek: (state, action) => {
+
+    searchByDate: (state, action) => {
       const value = action.payload;
-      state.flights = state.flights.filter((val) =>
-        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
-      );
+      switch (value) {
+        case "lastWeek":
+          state.flights = state.flights.filter((val) => {
+            return val;
+          });
+          break;
+        default:
+          state.flights = state.flights.filter((val) => {
+            return val;
+          });
+      }
     },
-    searchByLastMonth: (state, action) => {
+
+    searchByLaunchStatus: (state, action) => {
       const value = action.payload;
-      state.flights = state.flights.filter((val) =>
-        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
-      );
+      switch (value) {
+        case "success":
+          state.flights = state.flights.filter((val) => {
+            if (val.launch_success) {
+              return val;
+            }
+            return null;
+          });
+          break;
+        case "failure":
+          state.flights = state.flights.filter((val) => {
+            if (!val.launch_success) {
+              return val;
+            }
+            return null;
+          });
+          break;
+        default:
+          state.flights = state.flights.filter((val) => {
+            return val;
+          });
+      }
     },
-    searchByLastYear: (state, action) => {
-      const value = action.payload;
-      state.flights = state.flights.filter((val) =>
-        val.rocket.rocket_name.toLowerCase().includes(value.toLowerCase())
-      );
+
+    isUpcoming: (state, action) => {
+      // const value = action.payload;
+      state.flights = state.flights.filter((val) => {
+        if (val.upcoming) {
+          return val;
+        }
+        return null;
+      });
     },
   },
 
@@ -56,5 +89,10 @@ const flightSlice = createSlice({
   },
 });
 
-export const { searchByRocketName } = flightSlice.actions;
+export const {
+  searchByRocketName,
+  isUpcoming,
+  searchByLaunchStatus,
+  searchByDate,
+} = flightSlice.actions;
 export default flightSlice.reducer;

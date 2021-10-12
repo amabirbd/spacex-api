@@ -15,7 +15,7 @@ function Flights() {
     return (
       <div className="flights">
         {flights.map((flight) => (
-          <Card flight={flight} status={status} />
+          <Card flight={flight} status={status} key={flight.mission_name} />
         ))}
       </div>
     );

@@ -6,17 +6,33 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { searchByDate } from "../redux/flights/flightSlice";
 
 function SearchByDate() {
+  const [value, setValue] = useState();
+  const dispatch = useDispatch();
+
+  const handleRadioChange = (e) => {
+    setValue(e.target.value);
+    console.log(value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchByDate(e.target.value));
+    console.log(e.target.value);
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <FormControl component="fieldset">
         <FormLabel component="legend">Search by date</FormLabel>
         <RadioGroup
           aria-label=""
-          defaultValue="female"
           name="radio-buttons-group"
+          onChange={handleRadioChange}
         >
           <FormControlLabel
             value="prev_week"
@@ -34,9 +50,9 @@ function SearchByDate() {
             label="Previous year"
           />
         </RadioGroup>
-        <Button type="submit">search</Button>
+        <Button type="submit">Filter</Button>
       </FormControl>
-    </div>
+    </form>
   );
 }
 
