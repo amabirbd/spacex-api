@@ -10,6 +10,7 @@ export const getFlights = createAsyncThunk("flights/fetchFlights", async () => {
 const initialState = {
   status: null,
   flights: [],
+  updatedFlights: []
 };
 
 const flightSlice = createSlice({
@@ -24,82 +25,61 @@ const flightSlice = createSlice({
       );
     },
 
-    searchByDate: (state, action) => {
-      const value = action.payload;
+    launchedLastWeek: (state, action) => {
+      state.updatedFlights = state.flights.filter((val) => {
+        let launchTime = moment(val.launch_date_utc);
 
-      let now = moment();
-      let oneWeekEarlier = now.subtract(7, "days");
-      let oneMonthEarlier = now.subtract(1, "months");
-      let oneYearEarlier = now.subtract(1, "years");
-
-      switch (value) {
-        case "lastWeek":
-          state.flights = state.flights.filter((val) => {
-            let launchTime = moment(val.launch_date_utc);
-
-            if (launchTime.isSameOrAfter(oneWeekEarlier)) {
-              return val;
-            }
-            return null;
-          });
-          break;
-        case "lastMonth":
-          state.flights = state.flights.filter((val) => {
-            let launchTime = moment(val.launch_date_utc);
-
-            if (launchTime.isSameOrAfter(oneMonthEarlier)) {
-              return val;
-            }
-            return null;
-          });
-          break;
-        case "lastYear":
-          state.flights = state.flights.filter((val) => {
-            let launchTime = moment(val.launch_date_utc);
-
-            if (launchTime.isSameOrAfter(oneYearEarlier)) {
-              return val;
-            }
-            return null;
-          });
-          break;
-
-        default:
-          state.flights = state.flights.filter((val) => {
-            return val;
-          });
-      }
+        if (launchTime.isBetween(moment().subtract(1, "weeks"), undefined)) {
+          return val;
+        }
+        return null;
+      });
     },
 
-    searchByLaunchStatus: (state, action) => {
-      const value = action.payload;
-      switch (value) {
-        case "success":
-          state.flights = state.flights.filter((val) => {
-            if (val.launch_success) {
-              return val;
-            }
-            return null;
-          });
-          break;
-        case "failure":
-          state.flights = state.flights.filter((val) => {
-            if (!val.launch_success) {
-              return val;
-            }
-            return null;
-          });
-          break;
-        default:
-          state.flights = state.flights.filter((val) => {
-            return val;
-          });
-      }
+    launchedLastMonth: (state, action) => {
+      state.updatedFlights = state.flights.filter((val) => {
+        let launchTime = moment(val.launch_date_utc);
+
+        if (launchTime.isBetween(moment().subtract(1, "month"), undefined)) {
+          return val;
+        }
+        return null;
+      });
     },
+
+    launchedLastYear: (state, action) => {
+      state.updatedFlights = state.flights.filter((val) => {
+        let launchTime = moment(val.launch_date_utc);
+
+        if (launchTime.isBetween(moment().subtract(1, "years"), undefined)) {
+          return val;
+        }
+        return null;
+      });
+    },
+
+    launchSuccess: (state, action) => {
+      state.updatedFlights = state.flights.filter((val) => {
+        if (val.launch_success) {
+          return val;
+        }
+        return null;
+      })
+    },
+
+    launchFailure: (state, action) => {
+      state.updatedFlights = state.flights.filter((val) => {
+        if (!val.launch_success) {
+          return val;
+        }
+        return null;
+      })
+    },
+
 
     isUpcoming: (state, action) => {
       // const value = action.payload;
-      state.flights = state.flights.filter((val) => {
+      state.updatedFlights = state.flights.filter((val) => {
         if (val.upcoming) {
           return val;
         }
@@ -114,6 +94,8 @@ const flightSlice = createSlice({
     },
     [getFlights.fulfilled]: (state, action) => {
       state.flights = action.payload;
+      state.updatedFlights = action.payload;
+
       state.status = "success";
     },
     [getFlights.rejected]: (state, action) => {
@@ -125,7 +107,10 @@ const flightSlice = createSlice({
 export const {
   searchByRocketName,
   isUpcoming,
-  searchByLaunchStatus,
-  searchByDate,
+  launchSuccess,
+  launchFailure,
+  launchedLastWeek,
+  launchedLastMonth,
+  launchedLastYear,
 } = flightSlice.actions;
 export default flightSlice.reducer;

@@ -4,17 +4,18 @@ import { getFlights } from "./flightSlice";
 import Card from "../../components/Card";
 function Flights() {
   const dispatch = useDispatch();
-  const { flights, status } = useSelector((state) => state.flights);
+  const { status, updatedFlights } = useSelector((state) => state.flights);
 
   useEffect(() => {
     dispatch(getFlights());
   }, [dispatch]);
 
-  console.log(flights);
+  console.log(updatedFlights);
+
   if (status === "success") {
     return (
       <div className="flights">
-        {flights.map((flight) => (
+        {updatedFlights.map((flight) => (
           <Card flight={flight} status={status} key={flight.mission_name} />
         ))}
       </div>
@@ -22,7 +23,7 @@ function Flights() {
   } else if (status === "loading") {
     return <h1>Loading</h1>;
   }
-  return <h1>Something went wrong</h1>;
+  return <h1>Unable To Fetch Data</h1>;
 }
 
 export default Flights;

@@ -16,7 +16,6 @@
 .filter {
   margin: 20px 10px;
   display: flex;
-  justify-content: space-between;
 }
 
 .filter div {

@@ -1,10 +1,6 @@
 import {
-  Button,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
+  Button
+
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -16,32 +12,14 @@ function Upcoming() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setValue(e.target.value);
     dispatch(isUpcoming(value));
   };
 
-  const handleRadioChange = (e) => {
-    setValue(e.target.value);
-    console.log(e.target.value);
-  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Is upcoming?</FormLabel>
-        <RadioGroup
-          aria-label="isUpcoming"
-          name="isUpcoming"
-          onChange={handleRadioChange}
-        >
-          <FormControlLabel
-            value="upComing"
-            control={<Radio />}
-            label="Up coming"
-          />
-        </RadioGroup>
-        <Button type="submit">Filter</Button>
-      </FormControl>
-    </form>
+    <Button type="submit" value="upcoming" variant="outlined" onClick={handleSubmit}>Upcoming</Button>
+
   );
 }
 
